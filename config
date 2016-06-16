@@ -1,14 +1,17 @@
+#!/bin/sh
+# filename: config
 LDAPADDCMD="/usr/bin/ldapadd"
 LDAPDELCMD="/usr/bin/ldapdelete"
 SLAPPASSWORD="/usr/sbin/slappasswd"
-SECRET="/root/ldap/secret" # Put your password in this file. We recommend making it readable just by root.
-LDAPPASS=`cat $SECRET`
-HOMEDIR="/home/users"
+#SECRET="/root/ldap/secret" # Put your password in this file. We recommend making it readable just by root.
+#LDAPPASS=`cat $SECRET`
+LDAPPASS="hadoop730"
+HOMEDIR="/home"
 SKEL="/etc/skel"
-TMP="/root/ldap/tmp"
+TMP="/root/ldap"
 UNIT="People"
 ORG="com"
-DOMAIN="YOURDOMAIN"
+DOMAIN="chttl"
 GROUP="Group"
 MODDATE=`date "+%Y%m%d%H%M%S.%N"`
 ARCHIVE=".deleted"
