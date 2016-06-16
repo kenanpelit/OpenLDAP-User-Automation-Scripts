@@ -1,10 +1,10 @@
 #!/bin/sh
-# filename: addldapuser.sh
+# filename: addldapuser.sh
 CONFIG="/root/ldap/config"
 . $CONFIG
 if [[ ( -z $1 ) || ( -z $2 ) ]]; then
-  echo "addldapuser.sh <gidNumber> <username> "
-  exit 1
+  echo "addldapuser.sh <gidNumber> <username> "
+  exit 1
 fi
 USERNAME=$1
 LDIFNAME=$TMP/usr_$USERNAME.ldif
@@ -29,10 +29,10 @@ userPassword: $PASSWORD
 mail: $USERNAME@cht.com.tw
 add-user
 ) > $LDIFNAME
-$LDAPADDCMD -x -w $LDAPPASS -D "cn=root,dc=chttl,dc=cht,dc=com,dc=tw" -f $LDIFNAME
+$LDAPADDCMD -x -w $LDAPPASS -D "cn=root,dc=chttl,dc=cht,dc=com,dc=tw" -f $LDIFNAME
 if [ $? -ne "0" ]; then
-  echo "Failed"
-  echo "Please review $LDIFNAME and add the account manually"
+  echo "Failed"
+  echo "Please review $LDIFNAME and add the account manually"
 else
-  echo "Successfully, gidNumber=$LGID, uidNumber=$LUID"
+  echo "Successfully, gidNumber=$LGID, uidNumber=$LUID"
 fi
