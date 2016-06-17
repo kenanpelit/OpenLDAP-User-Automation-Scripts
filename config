@@ -2,6 +2,7 @@
 # filename: config
 LDAPADDCMD="/usr/bin/ldapadd"
 LDAPDELCMD="/usr/bin/ldapdelete"
+KDCADDCMD="/usr/sbin/kadmin.local"
 SLAPPASSWORD="/usr/sbin/slappasswd"
 #SECRET="/root/ldap/secret" # Put your password in this file. We recommend making it readable just by root.
 #LDAPPASS=`cat $SECRET`

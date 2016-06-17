@@ -1,9 +1,9 @@
-These are scripts I used to add and delete OpenLDAP accounts. Not for anything beyond causal use. :)
+These are scripts I used to add and delete OpenLDAP/Kerberos accounts. Not for anything beyond causal use. :)
 
 
 ## addldapgroup.sh
 
-add the group
+add the ldap group
 
 #### Usage: 
 
@@ -11,7 +11,6 @@ add the group
 `addldapuser.sh <groupname> <grouptype>`
 ```
 <groupname>: the ldap cn of group
-
 <grouptype>: the ldap description of group type
 ```
 
@@ -56,7 +55,7 @@ result: 0 Success
 
 ## addldapuser.sh
 
-adds the user
+adds the ldap user
 
 #### Usage: 
 
@@ -64,7 +63,6 @@ adds the user
 
 ```
 <gidNumber>: the ldap gidNumber of user
-
 <username>: the ldap uid of user
 ```
 
@@ -125,14 +123,62 @@ result: 0 Success
 # numEntries: 1
 ```
 
+## addkdcuser.sh
+
+adds the kerberos user
+
+#### Usage: 
+
+`addkdcuser.sh <username> <password>`
+
+```
+<username>: the kerberos principal of user
+<password>: the kerberos password of user
+```
+
+#### Example:
+
+```
+
+```
+
+
+
 ## delldapuser.sh
 
-deletes user.
+deletes ldap user.
+
+#### Usage: 
+
+`delldapuser.sh <username>`
+
+```
+<username>: the kerberos principal of user
+```
+
+#### Example:
+
+```
+[root@kdc ldap]# sh delldapuser.sh test0615
+Successfully, uid=test0615
+[root@kdc ldap]# ldapsearch -x -b 'uid=test0615,ou=people,dc=yy,dc=xx,dc=com,dc=tw' 'objectclass=*'
+# extended LDIF
+#
+# LDAPv3
+# base <uid=test0615,ou=people,dc=yy,dc=xx,dc=com,dc=tw> with scope subtree
+# filter: objectclass=*
+# requesting: ALL
+#
+
+# search result
+search: 2
+result: 32 No such object
+```
+
 
 ## config
 
 the config file the automation scripts reads off from
-
 
 
 
