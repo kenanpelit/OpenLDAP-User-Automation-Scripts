@@ -1,6 +1,6 @@
 #!/bin/sh
 # filename: addkdcuser.sh
-CONFIG="/root/ldap/config"
+CONFIG="/home/hdfs/ldap/config"
 . $CONFIG
 if [[ ( -z $1 ) || ( -z $2 ) ]]; then
   echo "$0 <username> <password>"
@@ -8,7 +8,7 @@ if [[ ( -z $1 ) || ( -z $2 ) ]]; then
 fi
 USERNAME=$1
 PASSWORD=$2
-$KDCADDCMD -q "addprinc -pw ${PASSWORD} ${USERNAME}" 
+$KDCADDCMD -p $KDCADMPRINC -w $KDCADMPWD -q "addprinc -pw ${PASSWORD} ${USERNAME}" 
 if [ $? -ne "0" ]; then
   echo "Failed"
 else

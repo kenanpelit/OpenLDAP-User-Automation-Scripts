@@ -1,6 +1,6 @@
 #!/bin/sh
 # filename: sethdfsacl.sh
-CONFIG="/root/ldap/config"
+CONFIG="/home/hdfs/ldap/config"
 . $CONFIG
 if [[ ( -z $1 ) || ( -z $2 ) ]]; then
   echo "$0 <dirname> <acl>"

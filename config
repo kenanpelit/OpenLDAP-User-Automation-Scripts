@@ -2,17 +2,22 @@
 # filename: config
 LDAPADDCMD="/usr/bin/ldapadd"
 LDAPDELCMD="/usr/bin/ldapdelete"
-KDCADDCMD="/usr/sbin/kadmin.local"
+KDCADDCMD="/usr/bin/kadmin"
+KDCADMPRINC="hdfs/admin"
+KDCADMPWD="mp62j0"
 SLAPPASSWORD="/usr/sbin/slappasswd"
 #SECRET="/root/ldap/secret" # Put your password in this file. We recommend making it readable just by root.
 #LDAPPASS=`cat $SECRET`
-LDAPPASS="hadoop730"
+LDAPPASS="mp62j0"
+LDAPUSERSUX="ou=People,dc=cht,dc=local"
+LDAPGROUPSUX="ou=group,dc=cht,dc=local"
+LDAPROOTSUX="dc=cht,dc=local"
 HOMEDIR="/home"
 SKEL="/etc/skel"
-TMP="/root/ldap"
+TMP="."
 UNIT="People"
 ORG="com"
-DOMAIN="chttl"
+DOMAIN="cht.com.tw"
 GROUP="Group"
 MODDATE=`date "+%Y%m%d%H%M%S.%N"`
 ARCHIVE=".deleted"

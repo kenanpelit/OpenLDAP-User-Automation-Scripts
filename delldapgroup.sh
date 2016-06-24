@@ -1,6 +1,6 @@
 #!/bin/sh
 # filename: delldapgroup.sh
-CONFIG="/root/ldap/config"
+CONFIG="/home/hdfs/ldap/config"
 
 . $CONFIG
 
@@ -11,7 +11,7 @@ fi
 
 GROUPNAME=$1
 
-$LDAPDELCMD -x -w $LDAPPASS -D "cn=root,dc=chttl,dc=cht,dc=com,dc=tw" "cn=$GROUPNAME,ou=group,dc=chttl,dc=cht,dc=com,dc=tw"
+$LDAPDELCMD -x -w $LDAPPASS -D "cn=root,$LDAPROOTSUX" "cn=$GROUPNAME,$LDAPGROUPSUX"
 
 if [ $? -ne "0" ]; then
   echo "Failed"

@@ -1,6 +1,6 @@
 #!/bin/sh
 # filename: delldapuser.sh
-CONFIG="/root/ldap/config"
+CONFIG="/home/hdfs/ldap/config"
 
 . $CONFIG
 
@@ -11,7 +11,7 @@ fi
 
 USERNAME=$1
 
-$LDAPDELCMD -x -w $LDAPPASS -D "cn=root,dc=chttl,dc=cht,dc=com,dc=tw" "uid=$USERNAME,ou=people,dc=chttl,dc=cht,dc=com,dc=tw"
+$LDAPDELCMD -x -w $LDAPPASS -D "cn=root,$LDAPROOTSUX" "uid=$USERNAME,$LDAPUSERSUX"
 
 if [ $? -ne "0" ]; then
   echo "Failed"
