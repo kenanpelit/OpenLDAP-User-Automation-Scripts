@@ -13,8 +13,8 @@ LDAPUSERSUX="ou=People,dc=cht,dc=local"
 LDAPGROUPSUX="ou=group,dc=cht,dc=local"
 LDAPROOTSUX="dc=cht,dc=local"
 #################  >>>>>>
-HDFSKDCPRINC="hdfs/up"
-HDFSKDCPWD="hdfs"
+HDFSKDCPRINC="xxx"
+HDFSKDCPWD="yyy"
 SCRIPTDIR="/home/hdfs/ldap"
 ################# <<<<<<<
 HOMEDIR="/home"
