@@ -18,12 +18,12 @@ add the ldap group
 
 ```
 [root@kdc ldap]# sh addldapgroup.sh test06221700 type1
-adding new entry "cn=test06221700,ou=group,dc=chttl,dc=cht,dc=com,dc=tw"
+adding new entry "cn=test06221700,ou=group,dc=yyy,dc=xxx,dc=com,dc=tw"
 
 Successfully, gidNumber=28565
 
 [root@kdc ldap]# cat grp_test06221700.ldif
-dn: cn=test06221700,ou=group,dc=chttl,dc=cht,dc=com,dc=tw
+dn: cn=test06221700,ou=group,dc=yyy,dc=xxx,dc=com,dc=tw
 objectClass: posixGroup
 description: type1
 gidNumber: 28565
@@ -33,13 +33,13 @@ cn: test06221700
 # extended LDIF
 #
 # LDAPv3
-# base <cn=test06221700,ou=group,dc=chttl,dc=cht,dc=com,dc=tw> with scope subtree
+# base <cn=test06221700,ou=group,dc=yyy,dc=xxx,dc=com,dc=tw> with scope subtree
 # filter: objectclass=*
 # requesting: ALL
 #
 
-# test06221700, group, chttl.cht.com.tw
-dn: cn=test06221700,ou=group,dc=chttl,dc=cht,dc=com,dc=tw
+# test06221700, group, yyy.xxx.com.tw
+dn: cn=test06221700,ou=group,dc=yyy,dc=xxx,dc=com,dc=tw
 objectClass: posixGroup
 description: type1
 gidNumber: 28565
@@ -70,12 +70,12 @@ adds the ldap user. the ldap password is the uidNumber of user
 
 ```
 [root@kdc ldap]# sh addldapuser.sh 28565 test06221700
-adding new entry "uid=test06221700,ou=people,dc=chttl,dc=cht,dc=com,dc=tw"
+adding new entry "uid=test06221700,ou=people,dc=yyy,dc=xxx,dc=com,dc=tw"
 
 Successfully, gidNumber=28565, uidNumber=20857
 
 [root@kdc ldap]# cat usr_test06221700.ldif
-dn: uid=test06221700,ou=people,dc=chttl,dc=cht,dc=com,dc=tw
+dn: uid=test06221700,ou=people,dc=yyy,dc=xxx,dc=com,dc=tw
 objectClass: posixAccount
 objectClass: inetOrgPerson
 objectClass: organizationalPerson
@@ -88,19 +88,19 @@ uid: test06221700
 cn: test06221700
 sn: test06221700
 userPassword: {CRYPT}Pwrd1bD5eCQUo
-mail: test06221700@cht.com.tw
+mail: test06221700@xxx.com.tw
 
-[root@kdc ldap]# ldapsearch -x -b 'uid=test06221700,ou=people,dc=chttl,dc=cht,dc=com,dc=tw' 'objectclass=*'
+[root@kdc ldap]# ldapsearch -x -b 'uid=test06221700,ou=people,dc=yyy,dc=xxx,dc=com,dc=tw' 'objectclass=*'
 # extended LDIF
 #
 # LDAPv3
-# base <uid=test06221700,ou=people,dc=chttl,dc=cht,dc=com,dc=tw> with scope subtree
+# base <uid=test06221700,ou=people,dc=yyy,dc=xxx,dc=com,dc=tw> with scope subtree
 # filter: objectclass=*
 # requesting: ALL
 #
 
-# test06221700, people, chttl.cht.com.tw
-dn: uid=test06221700,ou=people,dc=chttl,dc=cht,dc=com,dc=tw
+# test06221700, people, yyy.xxx.com.tw
+dn: uid=test06221700,ou=people,dc=yyy,dc=xxx,dc=com,dc=tw
 objectClass: posixAccount
 objectClass: inetOrgPerson
 objectClass: organizationalPerson
@@ -113,7 +113,7 @@ uid: test06221700
 cn: test06221700
 sn: test06221700
 userPassword:: e0NSWVBUfVB3cmQxYkQ1ZUNRVW8=
-mail: test06221700@cht.com.tw
+mail: test06221700@xxx.com.tw
 
 # search result
 search: 2
@@ -141,14 +141,14 @@ adds the kerberos user
 
 ```
 [root@kdc ldap]# sh addkdcuser.sh test06221700 20857
-Authenticating as principal root/admin@CHT.COM.TW with password.
-WARNING: no policy specified for test06221700@CHT.COM.TW; defaulting to no policy
-Principal "test06221700@CHT.COM.TW" created.
+Authenticating as principal root/admin@xxx.COM.TW with password.
+WARNING: no policy specified for test06221700@xxx.COM.TW; defaulting to no policy
+Principal "test06221700@xxx.COM.TW" created.
 Successfully, principal=test06221700
 
 [root@kdc ldap]# kadmin.local -q "listprincs test06221700*"
-Authenticating as principal root/admin@CHT.COM.TW with password.
-test06221700@CHT.COM.TW
+Authenticating as principal root/admin@xxx.COM.TW with password.
+test06221700@xxx.COM.TW
 ```
 
 ## mkhdfsdir.sh
@@ -252,17 +252,17 @@ create hive database, role, grant all privileges to role, and grant role to grou
 #### Example:
 
 ```
-[root@cluster5node5 ldap]# echo hdfs|kinit hdfs/test >/dev/null;sh /root/ldap/createdb.sh "jdbc:hive2://master4:10000/default;principal=hive/cluster5node5.cht.local@CHT.COM.TW" test06221700
+[root@cluster5node5 ldap]# echo hdfs|kinit hdfs/test >/dev/null;sh /root/ldap/createdb.sh "jdbc:hive2://master4:10000/default;principal=hive/cluster5node5.xxx.local@xxx.COM.TW" test06221700
 Successfully, DB is test06221700, Grant ROLE test06221700_user to Group test06221700
 
-[root@cluster5node5 ldap]# echo hdfs|kinit hdfs/test >/dev/null;beeline --silent=true -u "jdbc:hive2://master4:10000/default;principal=hive/cluster5node5.cht.local@CHT.COM.TW" -e "describe database test06221700"
+[root@cluster5node5 ldap]# echo hdfs|kinit hdfs/test >/dev/null;beeline --silent=true -u "jdbc:hive2://master4:10000/default;principal=hive/cluster5node5.xxx.local@xxx.COM.TW" -e "describe database test06221700"
 +---------------+----------+----------------------------------------------------------+-------------+-------------+-------------+--+
 |    db_name    | comment  |                         location                         | owner_name  | owner_type  | parameters  |
 +---------------+----------+----------------------------------------------------------+-------------+-------------+-------------+--+
 | test06221700  |          | hdfs://nameservice1/user/hive/warehouse/test06221700.db  | hive        | USER        |             |
 +---------------+----------+----------------------------------------------------------+-------------+-------------+-------------+--+
 
-[root@cluster5node5 ~]# echo hdfs|kinit hdfs/test >/dev/null;beeline --silent=true -u "jdbc:hive2://master4:10000/default;principal=hive/cluster5node5.cht.local@CHT.COM.TW" -e "show grant role test06221700_user"
+[root@cluster5node5 ~]# echo hdfs|kinit hdfs/test >/dev/null;beeline --silent=true -u "jdbc:hive2://master4:10000/default;principal=hive/cluster5node5.xxx.local@xxx.COM.TW" -e "show grant role test06221700_user"
 +-----------------------------------------------+--------+------------+---------+--------------------+-----------------+------------+---------------+-------------------+----------+--+
 |                   database                    | table  | partition  | column  |   principal_name   | principal_type  | privilege  | grant_option  |    grant_time     | grantor  |
 +-----------------------------------------------+--------+------------+---------+--------------------+-----------------+------------+---------------+-------------------+----------+--+
@@ -270,7 +270,7 @@ Successfully, DB is test06221700, Grant ROLE test06221700_user to Group test0622
 | hdfs://nameservice1/hive/test06221700_upload  |        |            |         | test06221700_user  | ROLE            | *          | false         | 1466589582666000  | --       |
 +-----------------------------------------------+--------+------------+---------+--------------------+-----------------+------------+---------------+-------------------+----------+--+
 
-[root@cluster5node5 ~]# echo hdfs|kinit hdfs/test >/dev/null;beeline --silent=true -u "jdbc:hive2://master4:10000/default;principal=hive/cluster5node5.cht.local@CHT.COM.TW" -e "show role grant group test06221700"
+[root@cluster5node5 ~]# echo hdfs|kinit hdfs/test >/dev/null;beeline --silent=true -u "jdbc:hive2://master4:10000/default;principal=hive/cluster5node5.xxx.local@xxx.COM.TW" -e "show role grant group test06221700"
 +--------------------+---------------+-------------+----------+--+
 |        role        | grant_option  | grant_time  | grantor  |
 +--------------------+---------------+-------------+----------+--+

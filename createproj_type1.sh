@@ -132,7 +132,7 @@ stty $stty_orig
 echo "+-------------------------------------------------------------------+"
 echo "(09) Creating Hive DB, Role..."
 SVR=tf2p079
-JDBCURL="jdbc:hive2://tf2p077.cht.local:10000/default;principal=hive/tf2p077.cht.local@CHT.COM.TW"
+JDBCURL="jdbc:hive2://tf2p077.xxx.local:10000/default;principal=hive/tf2p077.xxx.local@xxx.COM.TW"
 ssh $SVR "echo $HDFSKDCPWD|kinit $HDFSKDCPRINC >/dev/null;sh $SCRIPTDIR/createdb.sh \"$JDBCURL\" $PROJECT" 2>/dev/null
 echo "Listing Database $PROJECT..."
 ssh $SVR "echo $HDFSKDCPWD|kinit $HDFSKDCPRINC >/dev/null;beeline --silent=true -u \"$JDBCURL\" -e \"describe database $PROJECT\"" 2>/dev/null
